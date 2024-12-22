@@ -52,7 +52,6 @@ public class PeliculaController : ControllerBase
         db.Peliculas.Update(pelicula);
         db.SaveChanges();
         string hola = "Hola mundo";
-
         return Ok();
     }
 
