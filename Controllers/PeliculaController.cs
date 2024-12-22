@@ -18,6 +18,7 @@ public class PeliculaController : ControllerBase
         return Ok(peliculas);
     }
 
+
     [HttpPost]
     [Route("[action]")]
     //Crear Peliculas 
@@ -40,6 +41,7 @@ public class PeliculaController : ControllerBase
         return Ok();
     }
 
+
     [HttpPut]
     [Route("[action]")]
     public IActionResult ActualizarPelicula([FromBody] Pelicula pelicula)
@@ -47,6 +49,8 @@ public class PeliculaController : ControllerBase
         using var db = new ContextoDb();
         db.Peliculas.Update(pelicula);
         db.SaveChanges();
+        string hola = "Hola mundo";
         return Ok();
     }
+
 }
