@@ -28,7 +28,7 @@ jobs:
       run: dotnet publish --configuration Release --output ./publish
 
     - name: Deploy to IIS
-      uses: appleboy/ssh-action@v0.1.16 # Cambia la versión aquí
+      uses: appleboy/ssh-action@v1.2.0 # Cambia la versión aquí
       with:
         host: ${{ secrets.WINDOWS_SERVER_HOST }}
         username: ${{ secrets.WINDOWS_SERVER_USER }}
