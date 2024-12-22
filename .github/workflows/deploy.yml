@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '7.0' # Cambia según tu versión
+        dotnet-version: '7.0' # Cambia según tu versión de .NET
 
     - name: Restore Dependencies
       run: dotnet restore
@@ -28,14 +28,11 @@ jobs:
       run: dotnet publish --configuration Release --output ./publish
 
     - name: Deploy to IIS
-      uses: appleboy/ssh-action@v0.5.6
+      uses: appleboy/ssh-action@v0.1.16 # Cambia la versión aquí
       with:
         host: ${{ secrets.WINDOWS_SERVER_HOST }}
         username: ${{ secrets.WINDOWS_SERVER_USER }}
         password: ${{ secrets.WINDOWS_SERVER_PASSWORD }}
         script: |
-          New-Item -ItemType Directory -Force -Path "C:\inetpub\wwwroot\mi-aplicacion"
-          Copy-Item -Path ./publish/* -Destination "C:\inetpub\wwwroot\mi-aplicacion" -Recurse
-          Import-Module WebAdministration
-          Stop-WebAppPool -Name "DefaultAppPool"
-          Start-WebAppPool -Name "DefaultAppPool"
+          mkdir "C:\inetpub\wwwroot\mi-aplicacion"
+          xcopy /E /I /Y ./publish "C:\inetpub\wwwroot\mi-aplicacion"
