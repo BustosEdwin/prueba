@@ -30,22 +30,3 @@ jobs:
     - name: Debug - List Files in Publish Directory
       run: |
         dir ./publish
-
-    - name: Deploy to IIS
-      uses: appleboy/ssh-action@v1.2.0
-      with:
-        host: ${{ secrets.WINDOWS_SERVER_HOST }}
-        username: ${{ secrets.WINDOWS_SERVER_USER }}
-        password: ${{ secrets.WINDOWS_SERVER_PASSWORD }}
-        script: |
-          echo "Checking if directory exists"
-          if (Test-Path "C:\inetpub\wwwroot\mi-aplicacion") {
-              echo "Directory exists"
-          } else {
-              echo "Directory does not exist, creating..."
-              mkdir "C:\inetpub\wwwroot\mi-aplicacion"
-          }
-          echo "Listing files in publish folder"
-          xcopy /E /I /Y ./publish "C:\inetpub\wwwroot\mi-aplicacion"
-          echo "Completed copy"
-      shell: pwsh
