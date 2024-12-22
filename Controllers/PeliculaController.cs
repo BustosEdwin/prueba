@@ -27,6 +27,7 @@ public class PeliculaController : ControllerBase
         using var db = new ContextoDb();
         db.Peliculas.Add(pelicula);
         db.SaveChanges();
+
         return Ok();
     }
 
@@ -37,6 +38,7 @@ public class PeliculaController : ControllerBase
         using var db = new ContextoDb();
         var pelicula = db.Peliculas.Find(id);
         db.Peliculas.Remove(pelicula);
+
         db.SaveChanges();
         return Ok();
     }
